@@ -1,5 +1,15 @@
 # Dusklight Mod Template
 
+## Experimental Xbox One S port
+
+This fork builds **Roll and Sprint 1.1.0** with the Xbox Dusklight host.
+It must be bundled inside a signed Xbox MSIX; copying a desktop `.dusk` into
+app data will not work. Windows/UWP build and console testing are in progress.
+No working Xbox release is claimed yet.
+
+[Build progress](https://github.com/999sian/dusklight/actions/runs/39711549153)
+
+
 A standalone template for [Dusklight](https://github.com/TwilitRealm/dusklight) mods.
 
 See the [Dusklight modding documentation](https://github.com/TwilitRealm/dusklight/blob/main/docs/modding.md)
