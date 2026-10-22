@@ -12,14 +12,19 @@ if (NOT DUSKLIGHT_VERSION)
 endif ()
 # Fetches the Dusklight sources into ./dusklight and provides DUSKLIGHT_DIR.
 # Use -DDUSKLIGHT_DIR= to point at an existing Dusklight checkout.
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FetchDusklight.cmake")
-add_subdirectory("${DUSKLIGHT_DIR}/sdk" dusklight-sdk EXCLUDE_FROM_ALL)
+if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FetchDusklight.cmake")
+    add_subdirectory("${DUSKLIGHT_DIR}/sdk" dusklight-sdk EXCLUDE_FROM_ALL)
+else ()
+    set(DUSKLIGHT_DIR "${CMAKE_SOURCE_DIR}")
+endif ()
 
 configure_file(mod.json.in "${CMAKE_CURRENT_BINARY_DIR}/mod.json" @ONLY NEWLINE_STYLE LF)
 
 add_mod(roll_and_sprint
         FEATURES game          # remove for service/asset-only mods; add webgpu for GfxService
         SOURCES src/mod.cpp
-        MOD_JSON "${CMAKE_CURRENT_BINARY_DIR}/mod.json"
+        BUNDLE
+    MOD_JSON "${CMAKE_CURRENT_BINARY_DIR}/mod.json"
         RES_DIR res            # mod resources, including icon.png and banner.png
 )
